@@ -34,7 +34,7 @@ class Game:
     def update(self):
     #update for game loop
         self.all_sprites.update()
-
+        
     def events(self):
     #game loop events
         for event in pygame.event.get():
