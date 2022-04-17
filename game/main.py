@@ -19,7 +19,7 @@ class Game:
         self.player =Player()
         self.all_sprites.add(self.player)
         self.run()
-        
+
     def run(self):
     #game loop
         
@@ -54,7 +54,9 @@ class Game:
 
     def overScreen(self):
         pass
+
 #loop for playing the game
+
 g = Game()
 
 while g.running:
