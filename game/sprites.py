@@ -18,12 +18,14 @@ class Player(pygame.sprite.Sprite):
         self.acc = vec(0,0)
         keys = pygame.key.get_pressed()
         if keys[pygame.K_a]:
+            
             self.acc.x = -acceleration
             if self.vel.x < -maxvelocity:
                 self.acc.x = 0
             if self.pos.x < 0 + width/10/2:
                 self.vel.x = 0
                 self.acc.x = 0
+
         if keys[pygame.K_d]:
             self.acc.x = acceleration
             if self.vel.x > maxvelocity:
@@ -31,6 +33,7 @@ class Player(pygame.sprite.Sprite):
             if self.pos.x > width - width/10/2:
                 self.vel.x = 0
                 self.acc.x = 0
+
         if keys[pygame.K_w]:
             self.acc.y = -acceleration
             if self.vel.y < -maxvelocity:
@@ -38,6 +41,7 @@ class Player(pygame.sprite.Sprite):
             if self.pos.y < 0 + height /10/2:
                 self.vel.y = 0
                 self.acc.y = 0
+
         if keys[pygame.K_s]:
             self.acc.y = acceleration
             if self.vel.y > maxvelocity:
