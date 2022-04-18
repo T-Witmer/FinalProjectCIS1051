@@ -67,4 +67,4 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=self.rect.center)
         #got this bit from stack overflow, I could not figure uot these vectors myself
         
-   
+  
