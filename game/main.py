@@ -3,7 +3,7 @@ import random
 from settings import *
 from sprites import *
 
-
+#Followed tutorial for structure of files
 
 class Game:
     def __init__(self):
