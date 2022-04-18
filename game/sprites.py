@@ -1,5 +1,5 @@
 import pygame
-import math
+import random
 from settings import *
 vec = pygame.math.Vector2
 
@@ -12,13 +12,13 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = (width/2, height/ 2)
         self.orig_img = self.image
-        self.pos = vec(width/2, height/ 2)
+        self.pos = vec(width/2, height/ 2) #spawns in the center of the screen
         self.vel = vec(0,0)
         self.acc = vec(0,0)
 
     def update(self):
         self.acc = vec(0,0)
-        keys = pygame.key.get_pressed()
+        keys = pygame.key.get_pressed() #dictionary of keys being pressed
         if keys[pygame.K_a]:
 
             self.acc.x = -acceleration
@@ -58,13 +58,14 @@ class Player(pygame.sprite.Sprite):
         self.pos += self.vel + .5 * self.acc
 
         #following mouse for turning
-        pos1, pos2 = pygame.mouse.get_pos()
 
         self.rect.center = self.pos
         
         _ , angle = (pygame.mouse.get_pos()-self.pos).as_polar()
         self.image = pygame.transform.rotozoom(self.orig_img, -angle, 1)
         self.rect = self.image.get_rect(center=self.rect.center)
-        #got this bit from stack overflow, I could not figure uot these vectors myself
+        #got this bit from stack overflow, I could not figure out these vectors myself
         
-  
+class enemy1(pygame.sprite.Sprite):
+    def __init__(self):
+        self.image = pygame.image.load("assets/Player_Red.png")
