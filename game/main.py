@@ -11,6 +11,7 @@ class Game:
         pygame.init()
         
         self.WIN = pygame.display.set_mode((width,height))
+        self.bg = pygame.image.load("assets/space.png")
         self.clock = pygame.time.Clock()
         self.running = True
         
@@ -45,7 +46,7 @@ class Game:
         
     def draw(self):
     #game loop draw
-        self.WIN.fill("black")  
+        self.WIN.blit(pygame.transform.scale(self.bg, (width,height)), (0,0))
         self.all_sprites.draw(self.WIN)
         pygame.display.flip()
         
