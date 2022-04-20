@@ -68,4 +68,8 @@ class Player(pygame.sprite.Sprite):
         
 class enemy1(pygame.sprite.Sprite):
     def __init__(self):
-        self.image = pygame.image.load("assets/Player_Red.png")
+        pygame.sprite.Sprite.__init__(self)
+        self.image = pygame.image.load("assets/Redenemy.png")
+        self.rect = self.image.get_rect()
+        self.rect.center = (random.randint(0,width), random.randint(0,height))
+        
