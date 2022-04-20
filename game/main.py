@@ -19,6 +19,8 @@ class Game:
         self.all_sprites = pygame.sprite.Group()
         self.player =Player()
         self.all_sprites.add(self.player)
+        self.enemy1 = enemy1()
+        self.all_sprites.add(self.enemy1)
         self.run()
 
     def run(self):
