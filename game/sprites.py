@@ -8,7 +8,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("assets/Player_Blue.png")
-        self.image = pygame.transform.scale(self.image,(width/15,height/15))
+        
         self.rect = self.image.get_rect()
         self.rect.center = (width/2, height/ 2)
         self.orig_img = self.image
@@ -66,10 +66,41 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=self.rect.center)
         #got this bit from stack overflow, I could not figure out these vectors myself
         
+
+redship = pygame.image.load("assets/Redenemy.png")
+blueship = pygame.image.load("assets/Blueenemy.png")
+
 class enemy1(pygame.sprite.Sprite):
+
+
     def __init__(self):
+
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load("assets/Redenemy.png")
+        self.image = redship
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.center = (random.randint(0,width), random.randint(0,height))
+        self.vel = 2
+        self.orig_img = self.image
+        self.pos = vec(self.rect.center)
         
+    def look(self,player):
+
+        _ , angle = (player.pos -self.pos).as_polar()
+        self.image = pygame.transform.rotozoom(self.orig_img, -angle, 1)
+        self.rect = self.image.get_rect(center=self.rect.center)
+        #got this bit from stack overflow, I could not figure out these vectors myself changed it so it follows player
+
+    def follow(self,player):
+        
+        # Find direction vector (dx, dy) between enemy and player.
+        dirvect = pygame.math.Vector2(player.rect.x - self.rect.x,
+                                      player.rect.y - self.rect.y)
+        dirvect.normalize()
+        dirvect.scale_to_length(self.vel)
+        self.rect.move_ip(dirvect)
+    
+    #got this code from https://stackoverflow.com/questions/20044791/how-to-make-an-enemy-follow-the-player-in-pygame 
+class bullet(pygame.sprite.Sprite):
+    def __init__(self):
+        pygame.sprite.Sprite._init__(self)
