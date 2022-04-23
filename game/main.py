@@ -2,6 +2,7 @@ import pygame
 import random
 from settings import *
 from sprites import *
+from colliding import *
 
 #Followed tutorial for structure of files
 
@@ -17,7 +18,7 @@ class Game:
         
     def new(self):
         self.score = 0
-        self.level = 10
+        self.level = 0
         self.all_sprites = pygame.sprite.Group()
         self.enemySprites = pygame.sprite.Group()
         self.player = Player()
@@ -37,7 +38,8 @@ class Game:
                 self.enemy1 = enemy1()
                 enemies.append(self.enemy1)
                 self.enemySprites.add(self.enemy1)
-                
+
+              
 
         self.playing = True
         while self.playing:
@@ -63,7 +65,11 @@ class Game:
                 if self.playing:
                     self.playing = False
                 self.running = False
-        
+        if collide(self.player,self.enemy1) == True:
+            self.player.health -= 1
+            print(self.player.health)
+           
+            
     def draw(self):
     #game loop draw
         enemies = []
