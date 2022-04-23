@@ -17,9 +17,10 @@ class Game:
         
     def new(self):
         self.score = 0
-        self.level = 1
+        self.level = 3
         self.all_sprites = pygame.sprite.Group()
-        self.player =Player()
+        self.enemySprites = pygame.sprite.Group()
+        self.player = Player()
         self.all_sprites.add(self.player)
         self.run()
 
@@ -34,23 +35,27 @@ class Game:
 
             for i in range(self.level):
                 self.enemy1 = enemy1()
-            
+                enemies.append(self.enemy1)
+                self.enemySprites.add(self.enemy1)
+                
 
-
-        
         self.playing = True
         while self.playing:
             self.clock.tick(fps)
             self.events()
             self.update()
             self.draw()
+            
+            
 
 
     def update(self):
     #update for game loop
+       
         self.all_sprites.update()
-        self.enemy1.look(self.player)
-        self.enemy1.follow(self.player)
+        self.enemySprites.update(self.player)
+        
+
     def events(self):
     #game loop events
         for event in pygame.event.get():
@@ -64,8 +69,7 @@ class Game:
         enemies = []
         self.WIN.blit(pygame.transform.scale(self.bg, (width,height)), (0,0))
         self.all_sprites.draw(self.WIN)
-        for enemy in enemies:
-            enemy1.draw(self.WIN)
+        self.enemySprites.draw(self.WIN)
 
         pygame.display.flip()
         

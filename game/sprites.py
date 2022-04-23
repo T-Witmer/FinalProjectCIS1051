@@ -71,6 +71,7 @@ class Player(pygame.sprite.Sprite):
 redship = pygame.image.load("assets/Redenemy.png")
 blueship = pygame.image.load("assets/Blueenemy.png")
 
+'''
 class enemy2(pygame.sprite.Sprite):
      def __init__(self):
 
@@ -83,6 +84,7 @@ class enemy2(pygame.sprite.Sprite):
         self.orig_img = self.image
         self.pos = vec(self.rect.center)
 
+'''
 class enemy1(pygame.sprite.Sprite):
 
     def __init__(self):
@@ -92,26 +94,32 @@ class enemy1(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.center = (random.randint(0,width), random.randint(0,height))
-        self.vel = 2
+        self.vel = 5
         self.orig_img = self.image
         self.pos = vec(self.rect.center)
         
     def look(self,player):
 
         _ , angle = (player.pos -self.pos).as_polar()
-        self.image = pygame.transform.rotozoom(self.orig_img, -angle, 1)
-        self.rect = self.image.get_rect(center=self.rect.center)
+        
+        return angle
         #got this bit from stack overflow, I could not figure out these vectors myself changed it so it follows player
+        #https://gamedev.stackexchange.com/questions/132163/how-can-i-make-the-player-look-to-the-mouse-direction-pygame-2d
+
 
     def follow(self,player):
-        
         # Find direction vector (dx, dy) between enemy and player.
-        dirvect = pygame.math.Vector2(player.rect.x - self.rect.x,
-                                      player.rect.y - self.rect.y)
+        if self.vel > 5:
+            self.vel = 5
+        dirvect = vec(player.rect.x - self.rect.x, player.rect.y - self.rect.y)
+        
         dirvect.normalize()
-        dirvect.scale_to_length(self.vel)
+        dirvect.scale_to_length(5)
+        
         self.rect.move_ip(dirvect)
     
     #got this code from https://stackoverflow.com/questions/20044791/how-to-make-an-enemy-follow-the-player-in-pygame 
 
-
+    def update(self,player):
+        self.look(player)
+        self.follow(player)
