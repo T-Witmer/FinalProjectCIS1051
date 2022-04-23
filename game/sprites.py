@@ -16,8 +16,11 @@ class Player(pygame.sprite.Sprite):
         self.pos = vec(width/2, height/ 2) #spawns in the center of the screen
         self.vel = vec(0,0)
         self.acc = vec(0,0)
+        self.health = 1
 
     def update(self):
+  
+
         self.acc = vec(0,0)
         keys = pygame.key.get_pressed() #dictionary of keys being pressed
         if keys[pygame.K_a]:
@@ -97,7 +100,7 @@ class enemy1(pygame.sprite.Sprite):
         self.vel = 5
         self.orig_img = self.image
         self.pos = vec(self.rect.center)
-        
+        self.health = 1
     def look(self,player):
 
         _ , angle = (player.pos -self.pos).as_polar()
