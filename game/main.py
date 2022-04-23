@@ -17,7 +17,7 @@ class Game:
         
     def new(self):
         self.score = 0
-        self.level = 3
+        self.level = 10
         self.all_sprites = pygame.sprite.Group()
         self.enemySprites = pygame.sprite.Group()
         self.player = Player()
