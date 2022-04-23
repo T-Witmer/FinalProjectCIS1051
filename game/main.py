@@ -21,8 +21,6 @@ class Game:
         self.all_sprites = pygame.sprite.Group()
         self.player =Player()
         self.all_sprites.add(self.player)
-        self.enemy = enemy1()
-        self.all_sprites.add(self.enemy)
         self.run()
 
     def run(self):
@@ -35,7 +33,7 @@ class Game:
             self.level += 1
 
             for i in range(self.level):
-                self.enemy = enemy1()
+                self.enemy1 = enemy1()
             
 
 
@@ -86,3 +84,4 @@ while g.running:
     g.overScreen()
 
 pygame.quit()
+
