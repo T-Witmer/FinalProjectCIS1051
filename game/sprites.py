@@ -1,3 +1,4 @@
+from turtle import color
 import pygame
 import random
 from settings import *
@@ -8,7 +9,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load("assets/Player_Blue.png")
-        
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.center = (width/2, height/ 2)
         self.orig_img = self.image
@@ -65,13 +66,24 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.transform.rotozoom(self.orig_img, -angle, 1)
         self.rect = self.image.get_rect(center=self.rect.center)
         #got this bit from stack overflow, I could not figure out these vectors myself
-        
+        #https://gamedev.stackexchange.com/questions/132163/how-can-i-make-the-player-look-to-the-mouse-direction-pygame-2d
 
 redship = pygame.image.load("assets/Redenemy.png")
 blueship = pygame.image.load("assets/Blueenemy.png")
 
-class enemy1(pygame.sprite.Sprite):
+class enemy2(pygame.sprite.Sprite):
+     def __init__(self):
 
+        pygame.sprite.Sprite.__init__(self)
+        self.image = redship
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.center = (random.randint(0,width), random.randint(0,height))
+        self.vel = 2
+        self.orig_img = self.image
+        self.pos = vec(self.rect.center)
+
+class enemy1(pygame.sprite.Sprite):
 
     def __init__(self):
 
@@ -101,6 +113,5 @@ class enemy1(pygame.sprite.Sprite):
         self.rect.move_ip(dirvect)
     
     #got this code from https://stackoverflow.com/questions/20044791/how-to-make-an-enemy-follow-the-player-in-pygame 
-class bullet(pygame.sprite.Sprite):
-    def __init__(self):
-        pygame.sprite.Sprite._init__(self)
+
+

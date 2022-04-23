@@ -16,15 +16,29 @@ class Game:
         self.running = True
         
     def new(self):
+        self.score = 0
+        self.level = 1
         self.all_sprites = pygame.sprite.Group()
         self.player =Player()
         self.all_sprites.add(self.player)
-        self.enemy1 = enemy1()
-        self.all_sprites.add(self.enemy1)
+        self.enemy = enemy1()
+        self.all_sprites.add(self.enemy)
         self.run()
 
     def run(self):
     #game loop
+        
+        enemies = []
+
+        if len(enemies) == 0:
+            self.score += 100
+            self.level += 1
+
+            for i in range(self.level):
+                self.enemy = enemy1()
+            
+
+
         
         self.playing = True
         while self.playing:
@@ -38,6 +52,7 @@ class Game:
     #update for game loop
         self.all_sprites.update()
         self.enemy1.look(self.player)
+        self.enemy1.follow(self.player)
     def events(self):
     #game loop events
         for event in pygame.event.get():
@@ -48,8 +63,12 @@ class Game:
         
     def draw(self):
     #game loop draw
+        enemies = []
         self.WIN.blit(pygame.transform.scale(self.bg, (width,height)), (0,0))
         self.all_sprites.draw(self.WIN)
+        for enemy in enemies:
+            enemy1.draw(self.WIN)
+
         pygame.display.flip()
         
     def menuScreen(self):
