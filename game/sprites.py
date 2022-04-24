@@ -22,7 +22,6 @@ class Player(pygame.sprite.Sprite):
         if pygame.sprite.spritecollide(self, spriteGroup, True):
             self.health -= 1
 
-
     def update(self):
   
 
