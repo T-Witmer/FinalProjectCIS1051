@@ -8,12 +8,13 @@ from colliding import *
 #https://www.youtube.com/watch?v=Q-__8Xw9KTM&t=4995s
 #https://www.youtube.com/watch?v=pN9pBx5ln40
 # These tutorials helped make this game
+pygame.font.init()
 
 class Game:
     def __init__(self):
     #game window and other stuff
         pygame.init()
-        
+        self.font = pygame.font.SysFont("",50)
         self.WIN = pygame.display.set_mode((width,height))
         self.bg = pygame.image.load("assets/space.png")
         self.clock = pygame.time.Clock()
@@ -69,6 +70,10 @@ class Game:
                 if self.playing:
                     self.playing = False
                 self.running = False
+        if self.player.collide(self.enemySprites) == True:
+            self.player.health -= 1
+        if self.player.health == 0:
+            self.running = False
         
            
             
@@ -78,7 +83,8 @@ class Game:
         self.WIN.blit(pygame.transform.scale(self.bg, (width,height)), (0,0))
         self.all_sprites.draw(self.WIN)
         self.enemySprites.draw(self.WIN)
-
+        healthLabel = self.font.render(f"health: {self.player.health}", 1, (255,255,255))
+        self.WIN.blit(healthLabel, (10,10))
         pygame.display.flip()
         
     def menuScreen(self):
