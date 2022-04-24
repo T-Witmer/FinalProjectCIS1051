@@ -18,6 +18,11 @@ class Player(pygame.sprite.Sprite):
         self.acc = vec(0,0)
         self.health = 1
 
+    def collide(self, spriteGroup):
+        if pygame.sprite.spritecollide(self, spriteGroup, True):
+            self.health -= 1
+
+
     def update(self):
   
 

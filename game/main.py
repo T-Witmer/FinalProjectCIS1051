@@ -18,7 +18,7 @@ class Game:
         
     def new(self):
         self.score = 0
-        self.level = 0
+        self.level = 5
         self.all_sprites = pygame.sprite.Group()
         self.enemySprites = pygame.sprite.Group()
         self.player = Player()
@@ -55,6 +55,7 @@ class Game:
     #update for game loop
        
         self.all_sprites.update()
+        
         self.enemySprites.update(self.player)
         
 
@@ -65,9 +66,7 @@ class Game:
                 if self.playing:
                     self.playing = False
                 self.running = False
-        if collide(self.player,self.enemy1) == True:
-            self.player.health -= 1
-            print(self.player.health)
+        
            
             
     def draw(self):
