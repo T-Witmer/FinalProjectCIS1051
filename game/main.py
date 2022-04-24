@@ -5,6 +5,9 @@ from sprites import *
 from colliding import *
 
 #Followed tutorial for structure of files
+#https://www.youtube.com/watch?v=Q-__8Xw9KTM&t=4995s
+#https://www.youtube.com/watch?v=pN9pBx5ln40
+# These tutorials helped make this game
 
 class Game:
     def __init__(self):
