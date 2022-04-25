@@ -16,7 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.pos = vec(width/2, height/ 2) #spawns in the center of the screen
         self.vel = vec(0,0)
         self.acc = vec(0,0)
-        self.health = 1
+        self.health = 5
 
     def collide(self, spriteGroup):
         if pygame.sprite.spritecollide(self, spriteGroup, True):
@@ -105,6 +105,7 @@ class enemy1(pygame.sprite.Sprite):
         self.orig_img = self.image
         self.pos = vec(self.rect.center)
         self.health = 1
+        
     def look(self,player):
 
         _ , angle = (player.pos -self.pos).as_polar()
@@ -130,3 +131,17 @@ class enemy1(pygame.sprite.Sprite):
     def update(self,player):
         self.look(player)
         self.follow(player)
+
+
+class Bullet(pygame.sprite.Sprite):
+    def __init__(self):
+
+        pygame.sprite.Sprite.__init__(self)
+
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.center = (random.randint(0,width), random.randint(0,height))
+        self.vel = 5
+        self.orig_img = self.image
+        self.pos = vec(self.rect.center)
+        self.health = 1

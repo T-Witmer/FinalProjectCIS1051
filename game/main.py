@@ -22,7 +22,7 @@ class Game:
         
     def new(self):
         self.score = 0
-        self.level = 5
+        self.level = 0
         self.all_sprites = pygame.sprite.Group()
         self.enemySprites = pygame.sprite.Group()
         self.player = Player()
@@ -32,18 +32,8 @@ class Game:
     def run(self):
     #game loop
         
-        enemies = []
-
-        if len(enemies) == 0:
-            self.score += 100
-            self.level += 1
-
-            for i in range(self.level):
-                self.enemy1 = enemy1()
-                enemies.append(self.enemy1)
-                self.enemySprites.add(self.enemy1)
-
-              
+        
+        self.enemies = []      
 
         self.playing = True
         while self.playing:
@@ -51,7 +41,18 @@ class Game:
             self.events()
             self.update()
             self.draw()
+
             
+
+            if len(self.enemies) == 0:
+                self.score += 100
+                self.level += 1
+
+                for i in range(self.level):
+                    self.enemy1 = enemy1()
+                    self.enemies.append(self.enemy1)
+                    self.enemySprites.add(self.enemy1)
+
             
 
 
@@ -59,7 +60,6 @@ class Game:
     #update for game loop
        
         self.all_sprites.update()
-        
         self.enemySprites.update(self.player)
         
 
@@ -72,8 +72,11 @@ class Game:
                 self.running = False
         if self.player.collide(self.enemySprites) == True:
             self.player.health -= 1
+            self.enemies.remove(self.enemy1)
         if self.player.health == 0:
+            self.playing = False
             self.running = False
+
         
            
             
@@ -84,7 +87,9 @@ class Game:
         self.all_sprites.draw(self.WIN)
         self.enemySprites.draw(self.WIN)
         healthLabel = self.font.render(f"health: {self.player.health}", 1, (255,255,255))
+        levelLabel = self.font.render(f"Level: {self.level}",1,(255,255,255))
         self.WIN.blit(healthLabel, (10,10))
+        self.WIN.blit(levelLabel,(10,40))
         pygame.display.flip()
         
     def menuScreen(self):
