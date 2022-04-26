@@ -44,14 +44,7 @@ class Game:
 
             
 
-            if len(self.enemies) == 0:
-                self.score += 100
-                self.level += 1
-
-                for i in range(self.level):
-                    self.enemy1 = enemy1()
-                    self.enemies.append(self.enemy1)
-                    self.enemySprites.add(self.enemy1)
+            
 
             
 
@@ -77,7 +70,14 @@ class Game:
             self.playing = False
             self.running = False
 
-        
+        if len(self.enemies) == 0:
+                self.score += 100
+                self.level += 1
+
+                for i in range(self.level):
+                    self.enemy1 = enemy1()
+                    self.enemies.append(self.enemy1)
+                    self.enemySprites.add(self.enemy1)
            
             
     def draw(self):

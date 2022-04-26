@@ -16,7 +16,7 @@ class Player(pygame.sprite.Sprite):
         self.pos = vec(width/2, height/ 2) #spawns in the center of the screen
         self.vel = vec(0,0)
         self.acc = vec(0,0)
-        self.health = 5
+        self.health = 1
 
     def collide(self, spriteGroup):
         if pygame.sprite.spritecollide(self, spriteGroup, True):
